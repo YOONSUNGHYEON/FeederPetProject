@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "240815340817",
+    "firebase_url": "https://feederpet-6a563.firebaseio.com",
+    "project_id": "feederpet-6a563",
+    "storage_bucket": "feederpet-6a563.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:240815340817:android:4a39d53ca24474ed",
+        "android_client_info": {
+          "package_name": "net.skhu.feederpetedit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "240815340817-i0v1r8c42f05iq6st9ab1k3v9c2ql50e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDA5Mhr-VmURgCwKv9eQFPv07GB-ebH4VQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">FeederPetEdit</string>
+    <string name="button1">밥주기</string>
+    <string name="feederpet">피더펫</string>
+    <string name="feed">급식주기</string>
+    <string name="realtime">실시간</string>
+    <string name="reservation">급식 예약</string>
+    <string name="petinfo">펫정보</string>
+    <string name="one">1</string>
+    <string name="info">키우시는 반려동물을 알려주세요</string>
+    <string name="cat">고양이</string>
+    <string name="dog">강아지</string>
+    <string name="next">다음</string>
+    <string name="next2">다음</string>
+    <string name="two">2</string>
+    <string name="info2">반려동물의 이름을 알려주세요</string>
+    <string name="input">입력</string>
+</resources>
