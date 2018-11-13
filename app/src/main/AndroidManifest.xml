@@ -24,7 +24,7 @@
         <activity android:name=".PetInfoActivity1" />
         <activity android:name=".PetInfoActivity2" />
         <activity android:name=".LoginActivity" />
-        <activity android:name=".JoinActivity"></activity>
+        <activity android:name=".RegisterActivity"/>
     </application>
     <uses-permission android:name="android.permission.INTERNET" />
 </manifest>

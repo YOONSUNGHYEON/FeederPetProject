@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">FeederPetEdit</string>
+    <string name="app_name">피더펫</string>
     <string name="button1">밥주기</string>
     <string name="feederpet">피더펫</string>
     <string name="feed">급식주기</string>
