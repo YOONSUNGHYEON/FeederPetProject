@@ -7,29 +7,30 @@
     android:background="@color/colorPrimary"
     tools:context=".MainActivity">
 
-    <TextView
+    <Button
         android:id="@+id/feederText"
-        android:layout_width="95dp"
-        android:layout_height="48dp"
-        android:layout_marginLeft="48dp"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="4dp"
         android:text="@string/dog"
         android:textColor="@android:color/black"
+        android:backgroundTint="@color/colorPrimaryDark"
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dogButton" />
 
-    <TextView
+    <Button
         android:id="@+id/realTimeText"
-        android:layout_width="90dp"
-        android:layout_height="47dp"
-        android:layout_marginEnd="44dp"
-        android:layout_marginRight="44dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="28dp"
+        android:layout_marginRight="28dp"
         android:text="@string/cat"
         android:textColor="@android:color/black"
+        android:backgroundTint="@color/colorPrimaryDark"
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"

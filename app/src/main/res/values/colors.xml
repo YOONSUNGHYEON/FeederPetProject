@@ -3,4 +3,5 @@
     <color name="colorPrimary">#32B67A</color>
     <color name="colorPrimaryDark">#32B67A</color>
     <color name="colorAccent">#32B67A</color>
+    <color name="colorPetInfoButton">#32B67A</color>
 </resources>

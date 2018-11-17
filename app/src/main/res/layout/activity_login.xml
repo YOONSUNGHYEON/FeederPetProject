@@ -43,13 +43,22 @@
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:layout_gravity="center"
-            android:layout_marginBottom="25dp"
+            android:layout_marginBottom="5sp"
             android:background="@drawable/border"
             android:ems="10"
             android:hint="비밀번호"
-            android:inputType="textMultiLine|textNoSuggestions"
+            android:inputType="textPassword"
             app:layout_constraintStart_toStartOf="parent"
             tools:layout_editor_absoluteY="62dp" />
+
+        <Switch
+            android:id="@+id/autoLoginSwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginBottom="15sp"
+            android:layout_marginRight="60sp"
+            android:text="자동로그인   " />
 
         <Button
             android:id="@+id/loginButton"
@@ -75,6 +84,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             tools:layout_editor_absoluteY="187dp" />
+
+
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

@@ -45,7 +45,7 @@
         app:layout_constraintTop_toBottomOf="@+id/feederText" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/petNameEditText"
         android:layout_width="302dp"
         android:layout_height="50dp"
         android:layout_marginEnd="8dp"
@@ -80,5 +80,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText" />
+        app:layout_constraintTop_toBottomOf="@+id/petNameEditText" />
 </android.support.constraint.ConstraintLayout>

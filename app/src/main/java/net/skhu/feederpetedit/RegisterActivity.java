@@ -35,7 +35,6 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-
                 if(TextUtils.isEmpty(idText.getText()) || TextUtils.isEmpty(passwordText.getText())
                         || TextUtils.isEmpty(nameText.getText()) || TextUtils.isEmpty(ageText.getText())){
                     AlertDialog.Builder builder1 = new AlertDialog.Builder(RegisterActivity.this);
@@ -54,8 +53,10 @@ public class RegisterActivity extends AppCompatActivity {
                     final String petName = "";
 
                     final Response.Listener<String> responseListener = new Response.Listener<String>() {
+
                         @Override
                         public void onResponse(String response) {
+
                             try {
                                 JSONObject jsonResponse = new JSONObject(response);
                                 boolean success = jsonResponse.getBoolean("success");
@@ -81,10 +82,10 @@ public class RegisterActivity extends AppCompatActivity {
                         }
 
                     };
+
                     RegisterRequest registerRequest = new RegisterRequest(userID, userPassword, userName, userAge, petType, petName, responseListener);
                     RequestQueue queue = Volley.newRequestQueue(RegisterActivity.this);
                     queue.add(registerRequest);
-
                 }
 
 

@@ -7,7 +7,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.TextView;
+
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.Volley;
 
 import org.json.JSONObject;
 
@@ -22,6 +27,11 @@ public class LoginActivity extends AppCompatActivity {
         final EditText passwordText = (EditText)findViewById(R.id.passwordText);
         final Button loginButton = (Button)findViewById(R.id.loginButton);
         final TextView registerButton = (TextView)findViewById(R.id.registerButton);
+        final Switch autoLoginSwitch = (Switch)findViewById(R.id.autoLoginSwitch);
+
+
+
+
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -33,11 +43,44 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent petInfoIntent = new Intent(LoginActivity.this, PetInfoActivity1.class);
-                LoginActivity.this.startActivity(petInfoIntent);
+                final String userID = idText.getText().toString();
+                final String userPassword = passwordText.getText().toString();
+
+                Response.Listener<String> reponseListener = new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try{
+                            JSONObject jsonResponse = new JSONObject(response);
+                            boolean success = jsonResponse.getBoolean("success");
+                            if(success){
+                                String userID = jsonResponse.getString("userID");
+                                String userPassword = jsonResponse.getString("userPassword");
+                                Intent intent = new Intent(LoginActivity.this, PetInfoActivity1.class);
+                                intent.putExtra("userID", userID);
+                                intent.putExtra("userPassword", userPassword);
+                                LoginActivity.this.startActivity(intent);
+
+                            }
+                            else
+                            {
+                                AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
+                                builder.setMessage("로그인에 실패하였습니다.")
+                                        .setNegativeButton("다시시도", null)
+                                        .create()
+                                        .show();
+                            }
+                        }
+                        catch (Exception e)
+                        {
+                            e.printStackTrace();
+                        }
+                    }
+                };
+                LoginRequest loginRequest = new LoginRequest(userID, userPassword, reponseListener);
+                RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
+                queue.add(loginRequest);
             }
         });
-
     }
     }
 
