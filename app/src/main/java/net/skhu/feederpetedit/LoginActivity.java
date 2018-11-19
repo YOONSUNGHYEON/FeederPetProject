@@ -14,6 +14,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class LoginActivity extends AppCompatActivity {
@@ -55,10 +56,20 @@ public class LoginActivity extends AppCompatActivity {
                             if(success){
                                 String userID = jsonResponse.getString("userID");
                                 String userPassword = jsonResponse.getString("userPassword");
-                                Intent intent = new Intent(LoginActivity.this, PetInfoActivity1.class);
-                                intent.putExtra("userID", userID);
-                                intent.putExtra("userPassword", userPassword);
-                                LoginActivity.this.startActivity(intent);
+                                int petType = jsonResponse.getInt("petType");
+                                if(petType == 0){
+                                    Intent intent = new Intent(LoginActivity.this, PetInfoActivity1.class);
+                                    intent.putExtra("userID", userID);
+                                    intent.putExtra("userPassword", userPassword);
+                                    LoginActivity.this.startActivity(intent);
+                                }
+                                else{
+                                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                    intent.putExtra("userID", userID);
+                                    intent.putExtra("userPassword", userPassword);
+                                    LoginActivity.this.startActivity(intent);
+                                }
+
 
                             }
                             else
