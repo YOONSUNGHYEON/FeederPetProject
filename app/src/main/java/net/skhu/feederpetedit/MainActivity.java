@@ -24,7 +24,7 @@ import app.akexorcist.bluetotohspp.library.DeviceList;
 public class MainActivity extends AppCompatActivity {
 
     private BluetoothSPP bt;
-    final Button bluthButton = (Button)findViewById(R.id.bluthButton);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (!bt.isBluetoothAvailable()) { //블루투스 사용 불가
             Toast.makeText(getApplicationContext()
-                    , "Bluetooth is not available"
+                    , "블루투스를 사용할 수 없습니다"
                     , Toast.LENGTH_SHORT).show();
             finish();
         }
@@ -60,22 +60,26 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext()
                         , "Unable to connect", Toast.LENGTH_SHORT).show();
             }
+
         });
 
 
-    Intent intent  = getIntent(); //인텐트값 받기
-        TextView petinfoText = (TextView)findViewById(R.id.petinfoText);
-        final ImageButton feederButton = (ImageButton)findViewById(R.id.feederButton);
-        final ImageButton cameraButton = (ImageButton)findViewById(R.id.cameraButton);
-        final ImageButton reservButton = (ImageButton)findViewById(R.id.reservButton);
+        Intent intent = getIntent(); //인텐트값 받기
+        TextView petinfoText = (TextView) findViewById(R.id.petinfoText);
+        final ImageButton feederButton = (ImageButton) findViewById(R.id.feederButton);
+        final ImageButton cameraButton = (ImageButton) findViewById(R.id.cameraButton);
+        final ImageButton reservButton = (ImageButton) findViewById(R.id.reservButton);
+        final Button bluthButton = (Button) findViewById(R.id.bluthButton);
 
 
         feederButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 new BackgroundTask().execute();
+                        bt.send("급식주기", true);
 
-           }
+                    //feederButton 버튼을 누르면 '급식주기' 문장이 전달되고 아두이노에서 그 문장을 받으면 회전을 한다.
+            }
         });
 
         cameraButton.setOnClickListener(new View.OnClickListener() {
@@ -95,18 +99,21 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        bluthButton.setOnClickListener(new View.OnClickListener() {      //연결시도
+        bluthButton.setOnClickListener(new View.OnClickListener() {      //블루투스 버튼을 누르면 연결시도
             public void onClick(View v) {
                 if (bt.getServiceState() == BluetoothState.STATE_CONNECTED) {
                     //bt.disconnect();
-                    Toast.makeText(getApplicationContext(), "Connection succeeded. ", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "연결 성공", Toast.LENGTH_SHORT).show();
                 } else {
                     Intent intent = new Intent(getApplicationContext(), DeviceList.class);
                     startActivityForResult(intent, BluetoothState.REQUEST_CONNECT_DEVICE);
+                    Toast.makeText(getApplicationContext(), "다시 연결을 시도하세요", Toast.LENGTH_SHORT).show();
                 }
 
             }
         });
+
+
     }
 
     public void onDestroy() {
@@ -123,10 +130,12 @@ public class MainActivity extends AppCompatActivity {
             if (!bt.isServiceAvailable()) {
                 bt.setupService();
                 bt.startService(BluetoothState.DEVICE_OTHER); //DEVICE_ANDROID는 안드로이드 기기 끼리
-                setup();
+               setup();
             }
         }
     }
+
+
     public void setup() {
         ImageButton btnSend = findViewById(R.id.feederButton); //데이터 전송
         btnSend.setOnClickListener(new View.OnClickListener() {
@@ -136,6 +145,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });     //feederButton 버튼을 누르면 '급식주기' 문장이 전달되고 아두이노에서 그 문장을 받으면 회전을 한다.
     }
+
+
 
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -149,15 +160,12 @@ public class MainActivity extends AppCompatActivity {
                 setup();
             } else {
                 Toast.makeText(getApplicationContext()
-                        , "Bluetooth was not enabled."
+                        , "블루투스가 작동하지 않습니다"
                         , Toast.LENGTH_SHORT).show();
                 finish();
             }
         }
     }
-
-
-
 
 
 
