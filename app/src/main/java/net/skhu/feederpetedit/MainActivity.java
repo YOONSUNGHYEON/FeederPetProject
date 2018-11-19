@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,6 +24,7 @@ import app.akexorcist.bluetotohspp.library.DeviceList;
 public class MainActivity extends AppCompatActivity {
 
     private BluetoothSPP bt;
+    final Button bluthButton = (Button)findViewById(R.id.bluthButton);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,12 +69,13 @@ public class MainActivity extends AppCompatActivity {
         final ImageButton cameraButton = (ImageButton)findViewById(R.id.cameraButton);
         final ImageButton reservButton = (ImageButton)findViewById(R.id.reservButton);
 
+
         feederButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 new BackgroundTask().execute();
 
-            }
+           }
         });
 
         cameraButton.setOnClickListener(new View.OnClickListener() {
@@ -91,15 +94,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        ImageButton btnConnect = findViewById(R.id.feederButton); //연결시도
-        btnConnect.setOnClickListener(new View.OnClickListener() {
+
+        bluthButton.setOnClickListener(new View.OnClickListener() {      //연결시도
             public void onClick(View v) {
                 if (bt.getServiceState() == BluetoothState.STATE_CONNECTED) {
-                    bt.disconnect();
+                    //bt.disconnect();
+                    Toast.makeText(getApplicationContext(), "Connection succeeded. ", Toast.LENGTH_SHORT).show();
                 } else {
                     Intent intent = new Intent(getApplicationContext(), DeviceList.class);
                     startActivityForResult(intent, BluetoothState.REQUEST_CONNECT_DEVICE);
                 }
+
             }
         });
     }
@@ -131,6 +136,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });     //feederButton 버튼을 누르면 '급식주기' 문장이 전달되고 아두이노에서 그 문장을 받으면 회전을 한다.
     }
+
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == BluetoothState.REQUEST_CONNECT_DEVICE) {
