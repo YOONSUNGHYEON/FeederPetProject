@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 new BackgroundTask().execute();
-                        bt.send("급식주기", true);
+                        bt.send("on", true);
 
                     //feederButton 버튼을 누르면 '급식주기' 문장이 전달되고 아두이노에서 그 문장을 받으면 회전을 한다.
             }

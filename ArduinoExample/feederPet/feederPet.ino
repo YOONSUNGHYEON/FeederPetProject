@@ -30,7 +30,7 @@ void loop(){
     Serial.println("input value: "+myString); //시리얼모니터에 myString값 출력
  
       if(myString=="급식주기")  //myString 값이 '급식주기'와 일치하면
-      {
+      {                    
         servo1.write(90);     //각도 90도로 움직임
       } else {
         servo1.write(0);   //각도 0도로 움직임
