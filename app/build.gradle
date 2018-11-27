@@ -25,8 +25,13 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-    implementation 'com.android.volley:volley:1.0.0'
+    implementation 'com.android.volley:volley:1.0.0'  //네트워크 통신에 필요한 라이브러리
     implementation 'com.akexorcist:bluetoothspp:1.0.0'
+
+
+
+
+
 
 }
 apply plugin: 'com.google.gms.google-services'

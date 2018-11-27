@@ -14,6 +14,7 @@
         android:layout_height="wrap_content"
         android:textColor="#000"
         android:text="먹이 준 시간"
+        android:textStyle="bold"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
          />
 
