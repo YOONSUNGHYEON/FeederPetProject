@@ -1,15 +1,16 @@
 #include <SoftwareSerial.h> //시리얼 통신 라이브러리 호출
 #include "Servo.h" //서보 라이브러리
- 
+int servoPin = 9;
 Servo myservo; //서보객체
 int blueTx=2;   //Tx (블투 보내는핀 설정)
 int blueRx=3;   //Rx (블투 받는핀 설정)
 SoftwareSerial mySerial(blueTx, blueRx);  //시리얼 통신을 위한 객체선언
 String myString=""; //받는 문자열
+int angle = 0;
  
 void setup() {
-  myservo.attach(12);   //서보 시그널 핀설정
-  myservo.write(0);     //서보 초기각도 0도 설정
+  myservo.attach(servoPin);   //서보 시그널 핀설정
+  //myservo.write(0);     //서보 초기각도 0도 설정
   mySerial.begin(9600); //블루투스 시리얼 개방
 }
  
@@ -27,9 +28,17 @@ void loop() {
  
       if(myString=="on")  //myString 값이 'on' 이라면
       {
-        myservo.write(90);     //각도 90도로 움직임
+        
+              myservo.write(0); 
+              delay(15); 
+           
+       // myservo.write(90);   
       } else {
-        myservo.write(0);   //각도 0도로 움직임
+       
+              myservo.write(180); 
+              delay(15); 
+            
+       // myservo.write(0);  
       }
     myString="";  //myString 변수값 초기화
   }

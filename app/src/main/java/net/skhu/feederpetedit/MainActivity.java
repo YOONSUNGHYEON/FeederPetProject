@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
         final ImageButton reservButton = (ImageButton) findViewById(R.id.reservButton);
         final Button bluthButton = (Button) findViewById(R.id.bluthButton);
 
-
+/*
         feederButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
                     //feederButton 버튼을 누르면 '급식주기' 문장이 전달되고 아두이노에서 그 문장을 받으면 회전을 한다.
             }
         });
-
+*/
         cameraButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
