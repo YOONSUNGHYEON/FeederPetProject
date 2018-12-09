@@ -1,18 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
     android:orientation="vertical"
+    android:paddingTop="50dp"
+    android:paddingBottom="30dp"
     tools:context=".ReservationActivity">
+
 
     <TextView
         android:id="@+id/feedReservationText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="급식 예약"
+        android:layout_gravity="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:textColor="#000"
         android:textSize="35sp"
@@ -20,84 +25,82 @@
 
     <TextView
         android:id="@+id/timeTextView"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="30dp"
         android:text="언제 급식을 원하시나요?"
         android:textColor="#000"
         android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/feedReservationText" />
-
-    <Button
-
-        android:id="@+id/btnchangedate"
-        android:layout_width="wrap_content"
+        />
+    <LinearLayout
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
-        android:background="#000000"
-        android:onClick="mOnClick"
-        android:text="날짜 선택"
-        android:textColor="@color/colorPrimary"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/timeTextView" />
+        android:orientation="horizontal"
+        android:layout_marginBottom="30dp"
+        android:layout_gravity="center">
 
-    <TextView
-        android:id="@+id/date"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginLeft="88dp"
-        android:layout_marginStart="88dp"
-        android:layout_marginTop="36dp"
-        android:text="date"
-        android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/btnchangedate"
-        app:layout_constraintTop_toBottomOf="@+id/timeTextView" />
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="2018/12/5"
+            android:paddingRight="50dp"
+            android:layout_weight="4"
+            android:gravity="right"
+            android:textSize="18sp" />
 
-    <Button
-        android:id="@+id/btnchangetime"
-        android:layout_width="wrap_content"
+        <Button
+            android:id="@+id/btnchangedate"
+            android:layout_width="100sp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#000000"
+            android:onClick="mOnClick"
+            android:text="날짜 선택"
+            android:textColor="@color/colorPrimary"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
-        android:background="#000000"
-        android:onClick="mOnClick"
-        android:text="시간 선택"
-        android:textColor="@color/colorPrimary"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnchangedate" />
+        android:orientation="horizontal"
+        android:layout_gravity="center">
 
-    <TextView
-        android:id="@+id/time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="104dp"
-        android:layout_marginStart="104dp"
-        android:layout_marginTop="32dp"
-        android:text="time"
-        android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/btnchangetime"
-        app:layout_constraintTop_toBottomOf="@+id/btnchangedate" />
-
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:gravity="right"
+            android:paddingRight="50dp"
+            android:text="10:42"
+            android:textSize="18sp" />
+        <Button
+            android:id="@+id/btnchangetime"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:background="#000000"
+            android:onClick="mOnClick"
+            android:text="시간 선택"
+            android:layout_weight="1"
+            android:textColor="@color/colorPrimary"
+            android:textSize="18sp"
+            />
+    </LinearLayout>
     <TextView
         android:id="@+id/gramTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginLeft="20dp"
         android:layout_marginTop="32dp"
         android:text="@string/gram"
         android:textColor="#000"
         android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnchangetime" />
+        />
 
 
     <LinearLayout
@@ -111,8 +114,7 @@
         android:background="#000"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/gramTextView">
+        >
 
         <TextView
             android:id="@+id/amountText"
@@ -147,39 +149,23 @@
             android:textColor="@color/colorPrimary"
             android:textStyle="bold" />
 
-        <Button
-            android:id="@+id/giveButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="#000"
-            android:text="확인"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="15dp"
-            android:textStyle="bold" />
+
     </LinearLayout>
 
     <Button
         android:id="@+id/reservButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_gravity="center"
         android:background="#000000"
         android:text="@string/reserv"
         android:textColor="@color/colorPrimary"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+        />
 
 
 
 
 
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>
 

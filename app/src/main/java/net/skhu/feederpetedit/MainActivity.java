@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -11,12 +12,19 @@ import android.widget.ImageButton;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.R.layout.*;
+import com.android.volley.Response;
+
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+
 import app.akexorcist.bluetotohspp.library.BluetoothSPP;
 import app.akexorcist.bluetotohspp.library.BluetoothState;
 import app.akexorcist.bluetotohspp.library.DeviceList;
@@ -24,12 +32,18 @@ import app.akexorcist.bluetotohspp.library.DeviceList;
 public class MainActivity extends AppCompatActivity {
 
     private BluetoothSPP bt;
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         bt = new BluetoothSPP(this); //Initializing
+        Intent intent = getIntent();
+        final TextView petinfoText = (TextView)findViewById(R.id.petinfoText);
+
+        user = (User)intent.getSerializableExtra("user");
+        petinfoText.setText(user.getPetName());
 
         if (!bt.isBluetoothAvailable()) { //블루투스 사용 불가
             Toast.makeText(getApplicationContext()
@@ -64,24 +78,21 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        Intent intent = getIntent(); //인텐트값 받기
-        TextView petinfoText = (TextView) findViewById(R.id.petinfoText);
+
         final ImageButton feederButton = (ImageButton) findViewById(R.id.feederButton);
         final ImageButton cameraButton = (ImageButton) findViewById(R.id.cameraButton);
         final ImageButton reservButton = (ImageButton) findViewById(R.id.reservButton);
         final Button bluthButton = (Button) findViewById(R.id.bluthButton);
 
-/*
+
         feederButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 new BackgroundTask().execute();
-                        bt.send("on", true);
 
-                    //feederButton 버튼을 누르면 '급식주기' 문장이 전달되고 아두이노에서 그 문장을 받으면 회전을 한다.
             }
         });
-*/
+
         cameraButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -90,10 +101,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //예약페이지 버튼
         reservButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, ReservationActivity.class);
+                Intent intent = new Intent(MainActivity.this, ReservationListActivity.class);
                 MainActivity.this.startActivity(intent);
             }
         });
@@ -130,20 +142,14 @@ public class MainActivity extends AppCompatActivity {
             if (!bt.isServiceAvailable()) {
                 bt.setupService();
                 bt.startService(BluetoothState.DEVICE_OTHER); //DEVICE_ANDROID는 안드로이드 기기 끼리
-               setup();
+                setup();
             }
         }
     }
 
 
     public void setup() {
-        ImageButton btnSend = findViewById(R.id.feederButton); //데이터 전송
-        btnSend.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                bt.send("급식주기", true);
 
-            }
-        });     //feederButton 버튼을 누르면 '급식주기' 문장이 전달되고 아두이노에서 그 문장을 받으면 회전을 한다.
     }
 
 

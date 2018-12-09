@@ -4,20 +4,25 @@ import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.android.volley.NetworkResponse;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class LoginActivity extends AppCompatActivity {
+
+    public User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,17 +61,19 @@ public class LoginActivity extends AppCompatActivity {
                             if(success){
                                 String userID = jsonResponse.getString("userID");
                                 String userPassword = jsonResponse.getString("userPassword");
+                                String userName = jsonResponse.getString("userName");
+                                int userAge = jsonResponse.getInt("userAge");
                                 int petType = jsonResponse.getInt("petType");
+                                String petName = jsonResponse.getString("petName");
+                                user = new User(userID, userPassword, userName, userAge, petType, petName);
                                 if(petType == 0){
                                     Intent intent = new Intent(LoginActivity.this, PetInfoActivity1.class);
-                                    intent.putExtra("userID", userID);
-                                    intent.putExtra("userPassword", userPassword);
+                                    intent.putExtra("user", user);
                                     LoginActivity.this.startActivity(intent);
                                 }
                                 else{
                                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                                    intent.putExtra("userID", userID);
-                                    intent.putExtra("userPassword", userPassword);
+                                    intent.putExtra("user", user);
                                     LoginActivity.this.startActivity(intent);
                                 }
 
@@ -92,6 +99,18 @@ public class LoginActivity extends AppCompatActivity {
                 queue.add(loginRequest);
             }
         });
+
     }
+
+    public void onErrorResponse(VolleyError error) {
+
+        Log.e("Volly Error", error.toString());
+
+        NetworkResponse networkResponse = error.networkResponse;
+        if (networkResponse != null) {
+            Log.e("Status code", String.valueOf(networkResponse.statusCode));
+        }
     }
+}
+
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,23 +9,25 @@
     tools:context=".ReservationListActivity">
 
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="실시간 예약 현황"
-        android:layout_marginTop="20sp"
-        android:layout_marginBottom="10sp"
-        android:textAppearance="@style/TextAppearance.AppCompat"
-        android:textSize="30dp"
-        android:textStyle="bold" />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
+        android:layout_marginBottom="30dp"
+        android:layout_marginTop="25dp"
         android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10sp"
+            android:layout_marginTop="20sp"
+            android:text="급식 예약 현황"
+            android:textAppearance="@style/TextAppearance.AppCompat"
+            android:textSize="30dp"
+            android:textStyle="bold" />
 
         <ListView
             android:id="@+id/listView"
@@ -38,4 +40,19 @@
             android:dividerHeight="10dp"></ListView>
     </LinearLayout>
 
-</LinearLayout>
+    <ImageButton
+        android:id="@+id/reservationRegisterButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:scaleType="fitCenter"
+        app:srcCompat="@drawable/plus1"
+        android:maxHeight="70dp"
+        android:maxWidth="70dp"
+        android:adjustViewBounds="true"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_margin="30dp"
+        />
+
+</RelativeLayout>

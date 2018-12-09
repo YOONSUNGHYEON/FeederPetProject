@@ -68,12 +68,14 @@ public class ReservationActivity extends AppCompatActivity {
         final EditText amountEditText = ( EditText) findViewById(R.id.amountEditText);
         final Button btnchangedate = (Button) findViewById(R.id.btnchangedate);
         final Button btnchangetime = (Button) findViewById(R.id.btnchangetime);
-        final Button giveButton = (Button) findViewById(R.id.giveButton);
         final Button reservButton = (Button) findViewById(R.id.reservButton);
 
-        giveButton.setOnClickListener(new View.OnClickListener() {
+
+
+        reservButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 final Response.Listener<String> responseListener = new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -81,13 +83,6 @@ public class ReservationActivity extends AppCompatActivity {
                             JSONObject jsonResponse = new JSONObject(response);
                             boolean success = jsonResponse.getBoolean("success");
                             if (success) {
-                                int feedGram = jsonResponse.getInt("feedGram");
-                              //  AlertDialog.Builder builder = new AlertDialog.Builder(ReservationActivity.this);
-                             //   builder.setMessage(amount + "g을 주시겠습니까?")
-                            //        .setPositiveButton("확인", null)
-                           //                  .create()
-                          //                   .show();
-
                                 AlertDialog.Builder builder = new AlertDialog.Builder(ReservationActivity.this);
                                 builder.setTitle("알림");
                                 builder.setMessage("예약을 하시겠습니까?");
@@ -100,7 +95,6 @@ public class ReservationActivity extends AppCompatActivity {
                                 builder.setNegativeButton("아니오", null);
                                 AlertDialog dialog = builder.create();
                                 dialog.show();
-
                             }
                             else {
                                 AlertDialog.Builder builder = new AlertDialog.Builder(ReservationActivity.this);
@@ -120,56 +114,10 @@ public class ReservationActivity extends AppCompatActivity {
                 ReservRequest ReserveRequest = new ReservRequest(feedGram, feedDate, feedTime, responseListener);
                 RequestQueue queue = Volley.newRequestQueue(ReservationActivity.this);
                 queue.add(ReserveRequest);
+            };
 
-            }
         });
-
-        reservButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-              final Response.Listener<String> responseListener = new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            JSONObject jsonResponse = new JSONObject(response);
-                            boolean success = jsonResponse.getBoolean("success");
-                            if (success) {
-                                AlertDialog.Builder builder = new AlertDialog.Builder(ReservationActivity.this);
-                                builder.setTitle("알림");
-                                builder.setMessage("예약을 하시겠습니까?");
-                                builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int index) {
-                                        Toast.makeText(ReservationActivity.this, "예약을 하였습니다", Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-                                builder.setNegativeButton("아니오", null);
-                                AlertDialog dialog = builder.create();
-                                dialog.show();
-                            }
-                            else {
-                                AlertDialog.Builder builder = new AlertDialog.Builder(ReservationActivity.this);
-                                builder.setTitle("알림");
-                                builder.setMessage("예약에 실패했습니다");
-                                AlertDialog dialog = builder.create();
-                                dialog.show();
-                            }
-                        }
-                        catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
-
-                        }
-                    };
-                ReservRequest ReserveRequest = new ReservRequest(feedGram, feedDate, feedTime, responseListener);
-                RequestQueue queue = Volley.newRequestQueue(ReservationActivity.this);
-                queue.add(ReserveRequest);
-                };
-
-            });
-        }
+    }
 
 
     public void mOnClick(View v) {
