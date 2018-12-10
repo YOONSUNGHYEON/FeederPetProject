@@ -247,6 +247,7 @@ public class FeederActivity extends AppCompatActivity {
         @Override
         protected Boolean doInBackground(Void... params) {
 
+
             byte [] readBuffer = new byte[1024];
             int readBufferPosition = 0;
 
@@ -258,7 +259,6 @@ public class FeederActivity extends AppCompatActivity {
                 try {
 
                     int bytesAvailable = mInputStream.available();
-
                     if(bytesAvailable > 0) {
 
                         byte[] packetBytes = new byte[bytesAvailable];
@@ -297,10 +297,17 @@ public class FeederActivity extends AppCompatActivity {
 
         @Override
         protected void onProgressUpdate(String... recvMessage) {
+            //mConversationArrayAdapter.insert(mConnectedDeviceName + ": " + recvMessage[0], 0);
+            /*TextView sendTextView = (TextView)findViewById(R.id.sendTextView);
+            String a = "ok ";
+            int b = Integer.parseInt(recvMessage[0]);
+            if(b == 1)
+            {
+                sendTextView.setText("fffff");
+            }*/
 
-            mConversationArrayAdapter.insert(mConnectedDeviceName + ": " + recvMessage[0], 0);
-            TextView sendTextView = (TextView)findViewById(R.id.sendTextView);
-            sendTextView.setText(recvMessage[0]);
+
+
         }
 
         @Override
@@ -340,7 +347,7 @@ public class FeederActivity extends AppCompatActivity {
 
         void write(String msg){
 
-            //msg += "\n";
+            msg += "\n";
 
             try {
                 mOutputStream.write(msg.getBytes());
