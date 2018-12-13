@@ -22,4 +22,10 @@
     <string name="input_gram">사료 양을 입력하세요.</string>
     <string name="reserv">예약</string>
     <string name="input_gram2">사료 양을 입력하세요</string>
+    <string name="weight">비만확인</string>
+    <string name="weightOk">비만인가 아닌가</string>
+    <string name="pregnantOk">임신인가 아닌가</string>
+    <string name="nursingOk">수유중인가 아닌가</string>
+    <string name="send">보내기</string>
+    <string name="result" />
 </resources>
