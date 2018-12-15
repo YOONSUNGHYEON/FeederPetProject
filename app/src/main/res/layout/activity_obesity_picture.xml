@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    android:orientation="vertical"
+    android:paddingTop="50dp"
+    android:paddingBottom="30dp"
+    tools:context=".obesityPicture">
+
+    <TextView
+        android:id="@+id/feedReservationText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="반려동물 비만도"
+        android:layout_gravity="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColor="#000"
+        android:textSize="35sp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/obesityPicture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/obesitypet"
+        android:layout_marginBottom="50dp"
+        />
+
+    <TextView
+        android:id="@+id/BCSText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#000"
+        android:layout_gravity="center"
+        android:text="BCS 측정방법"
+        android:textStyle="bold"
+        android:textSize="23sp"
+        android:layout_marginBottom="20dp"
+        />
+
+    <TextView
+        android:id="@+id/BCSExplain"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:textColor="#000"
+        android:layout_gravity="center"
+        android:text="눈으로 보는 방법과 손으로 만지는 방법이 있습니다"
+        android:textStyle="bold"
+        android:textSize="17sp"
+        android:layout_marginBottom="15dp"
+
+        />
+
+    <TextView
+        android:id="@+id/BCSway"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:textColor="#000"
+        android:layout_gravity="center"
+        android:text="위에서 갈비뼈, 허리를 확인"
+        android:textStyle="bold"
+        android:textSize="17sp"
+        />
+
+    <TextView
+        android:id="@+id/BCSway2"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:textColor="#000"
+        android:layout_gravity="center"
+        android:text="옆으로 보아 허리의 모양을 확인"
+        android:textStyle="bold"
+        android:textSize="17sp"
+        />
+
+    <TextView
+        android:id="@+id/BCSway3"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:textColor="#000"
+        android:layout_gravity="center"
+        android:text="손에 힘을 빼고 가볍게 몸통을 만져서 확인"
+        android:textStyle="bold"
+        android:textSize="17sp"
+        android:layout_marginBottom="30dp"
+        />
+
+    <TextView
+        android:id="@+id/BCSJudge"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:textColor="#000"
+        android:layout_gravity="center"
+        android:text="5단계가 가장 이상적임을 유의하세요"
+        android:textStyle="bold"
+        android:textSize="19sp"
+        android:layout_marginBottom="30dp"
+        />
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="#000000"
+        android:textColor="@color/colorPrimary"
+        android:text="이전화면"/>
+
+
+</LinearLayout>

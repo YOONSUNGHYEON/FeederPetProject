@@ -39,11 +39,10 @@
         <activity android:name=".RegisterActivity" />
         <activity android:name=".FeederActivity" />
         <activity android:name=".ReservationActivity" />
-        <activity android:name=".CameraActivity" />
         <activity android:name=".FeedRecord" />
         <activity android:name=".ReservationListActivity" />
         <activity android:name=".obesityActivity" />
-        <activity android:name=".obesityPicture"></activity>
+        <activity android:name=".obesityPicture" />
     </application>
 
 </manifest>

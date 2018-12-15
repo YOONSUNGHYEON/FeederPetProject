@@ -25,7 +25,7 @@
         app:srcCompat="@drawable/kt4" />
 
     <ImageButton
-        android:id="@+id/cameraButton"
+        android:id="@+id/obesityButton"
         android:layout_width="104dp"
         android:layout_height="136dp"
         android:layout_marginEnd="16dp"
@@ -35,7 +35,7 @@
         android:scaleType="centerInside"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/kt5" />
+        app:srcCompat="@drawable/weight" />
 
     <ImageButton
         android:id="@+id/feederButton"
@@ -70,11 +70,11 @@
         android:layout_marginEnd="52dp"
         android:layout_marginRight="52dp"
         android:layout_marginTop="8dp"
-        android:text="@string/realtime"
+        android:text="@string/obsity"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cameraButton" />
+        app:layout_constraintTop_toBottomOf="@+id/obesityButton" />
 
     <TextView
         android:id="@+id/reservText"
@@ -140,8 +140,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:background="#000000"
-        android:text="블루투스 연결"
         android:textColor="@color/colorPrimary"
+        android:text="블루투스 연결"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

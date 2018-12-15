@@ -28,4 +28,5 @@
     <string name="nursingOk">수유중인가 아닌가</string>
     <string name="send">보내기</string>
     <string name="result" />
+    <string name="obsity">비만도</string>
 </resources>
