@@ -14,14 +14,6 @@ public class obesityPicture extends AppCompatActivity {
         setContentView(R.layout.activity_obesity_picture);
         final Button button = (Button) findViewById(R.id.button);
 
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(obesityPicture.this, obesityActivity.class);
-                obesityPicture.this.startActivity(intent);
-            }
-        });
-
 
 
     }

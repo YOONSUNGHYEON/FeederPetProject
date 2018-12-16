@@ -14,10 +14,12 @@ import android.widget.Toast;
 import android.app.DialogFragment;
 import android.widget.Switch;
 import android.widget.CompoundButton;
+import android.content.Context;
 
 import java.io.Serializable;
 
 public class obesityActivity extends AppCompatActivity {
+    public static Context mContext;
 
     final TextView textView = (TextView) findViewById(R.id.textView);    //나이
     final TextView textView2 = (TextView) findViewById(R.id.textView2);   //몸무게
@@ -51,6 +53,18 @@ public class obesityActivity extends AppCompatActivity {
     double RER_under2 = 70 * weight * 0.75;    //체중이 2kg 미만
     ///////////////////휴식 상태에서의 에너지 요구량
 
+    double baby_dog = 0;   //새끼 강아지
+    double baby_cat = 0;   //새끼 고양이
+    double pregnant_cat = 0;  //임신한 고양이
+    double nursing_dog = 0;
+    //수유중인 개
+    double nursing_cat = 0;
+    //수유중인 고양이
+    double obesity_pet = 0;    //비만
+    double old_pet = 0;    //노령
+    double adult_dog = 0;    //성견
+    double adult_cat = 0;   //성묘
+
     Intent intent = getIntent();     //성현이가 이 부분 없앰
     final int petType = intent.getIntExtra("petType", 0);    //성현이가 이 부분 없앰
 
@@ -59,7 +73,7 @@ public class obesityActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_obesity);
 
-
+        mContext = this;
         Intent intent = getIntent();
         User obesity = (User) intent.getSerializableExtra("obesity");
 
@@ -68,7 +82,7 @@ public class obesityActivity extends AppCompatActivity {
         inputButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                kalCal(weight, age, amount);
+                kalCal(petType, weight, age, amount);
                 AlertDialog.Builder builder = new AlertDialog.Builder(obesityActivity.this);
                 builder.setTitle("사료 급여시 적정 식사량");
                 builder.setMessage("일일 칼로리(MER)÷라벨에 표기된 100g당" + amount + "*100(g)")
@@ -79,7 +93,7 @@ public class obesityActivity extends AppCompatActivity {
             }
         });
 
-        final Button obesityButton = (Button)findViewById(R.id.obesityButton);
+        final Button obesityButton = (Button) findViewById(R.id.obesityButton);
         obesityButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -142,7 +156,7 @@ public class obesityActivity extends AppCompatActivity {
 
     }
 
-    public void kalCal(double weight, int age, double amount) {
+    public void kalCal(int petType, double weight, int age, double amount) {
 
 
         double num = 0.75 * 0.75;
@@ -170,17 +184,17 @@ public class obesityActivity extends AppCompatActivity {
 //////////////////////////////////////////////////////////////////////////////////////////////////사료 급여시 적정 식사량
 
 
-        double baby_dog = 0;   //새끼 강아지
-        double baby_cat = 0;   //새끼 고양이
+        // double baby_dog = 0;   //새끼 강아지
+        //   double baby_cat = 0;   //새끼 고양이
 
 
 
 
     }
 
-    public void kalCal2(double weight) {
+    public void kalCal2(int petType, double weight, double amount) {
 
-        double pregnant_cat = 0;  //임신한 고양이
+      /*  double pregnant_cat = 0;  //임신한 고양이
         double nursing_dog = 0;
         //수유중인 개
         double nursing_cat = 0;
@@ -189,6 +203,7 @@ public class obesityActivity extends AppCompatActivity {
         double old_pet = 0;    //노령
         double adult_dog = 0;    //성견
         double adult_cat = 0;   //성묘
+        */
 
         double moderate_amount_Cat_pregnant = MER_Cat_pregnant(pregnant, weight) * amount * 100;
         double moderate_amount_Cat_obesity = MER_Cat_obesity(obesity, weight) * amount * 100;
@@ -200,9 +215,6 @@ public class obesityActivity extends AppCompatActivity {
 
 
     }
-
-
-
 
 
     public Double MER_Cat_baby(int age, double weight) {

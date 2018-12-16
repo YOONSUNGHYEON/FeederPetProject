@@ -37,8 +37,8 @@ public class MainActivity extends AppCompatActivity {
         final TextView petinfoText = (TextView)findViewById(R.id.petinfoText);
 
         user = (User)intent.getSerializableExtra("user");
-        final int petType = intent.getIntExtra("petType", 0);
-        // final int petType = intent.getExtras().getInt("petType");
+        // final int petType = intent.getIntExtra("petType", 0);
+        final int petType = intent.getExtras().getInt("petType");
 
         petinfoText.setText(user.getPetName());
 
@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
             MainActivity.this.startActivity(intent);
         }
         //강아지 페이지
+
 
         if (!bt.isBluetoothAvailable()) { //블루투스 사용 불가
             Toast.makeText(getApplicationContext()
@@ -107,12 +108,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //예약페이지 버튼
+        //비만도페이지 버튼
         obesityButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, obesityActivity.class);
-                intent.putExtra("obesity", user);
+                Intent intent = new Intent(MainActivity.this, obesityPicture.class);
+                // intent.putExtra("obesity", user);
                 MainActivity.this.startActivity(intent);
             }
         });
