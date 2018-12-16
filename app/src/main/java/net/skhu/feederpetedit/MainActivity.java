@@ -37,8 +37,8 @@ public class MainActivity extends AppCompatActivity {
         final TextView petinfoText = (TextView)findViewById(R.id.petinfoText);
 
         user = (User)intent.getSerializableExtra("user");
-        // final int petType = intent.getIntExtra("petType", 0);
-        final int petType = intent.getExtras().getInt("petType");
+         final int petType = intent.getIntExtra("petType", 0);
+      // final int petType = intent.getExtras().getInt("petType");
 
         petinfoText.setText(user.getPetName());
 
@@ -47,14 +47,14 @@ public class MainActivity extends AppCompatActivity {
         //그 객체가 가지고있는 정보를
         //비만도 페이지에 보내기
 
-        if(petType == 1){
-            intent = new Intent(MainActivity.this, catdogActivity.class);
+       if(petType == 1){
+            intent = new Intent(MainActivity.this, obesityActivity.class);
             MainActivity.this.startActivity(intent);
 
         }
         //고양이 페이지
         else if(petType == 2){
-            intent = new Intent(MainActivity.this, catdogActivity.class);
+            intent = new Intent(MainActivity.this, obesityActivity.class);
             MainActivity.this.startActivity(intent);
         }
         //강아지 페이지
@@ -112,8 +112,8 @@ public class MainActivity extends AppCompatActivity {
         obesityButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, obesityPicture.class);
-                // intent.putExtra("obesity", user);
+                Intent intent = new Intent(MainActivity.this, obesityActivity.class);
+                intent.putExtra("obesity", user);
                 MainActivity.this.startActivity(intent);
             }
         });
