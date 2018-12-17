@@ -6,9 +6,9 @@ import android.bluetooth.BluetoothSocket;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -16,21 +16,26 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
-public class FeederActivity extends AppCompatActivity {
-
+public class FeederActivity extends BaseActivity {
+    User user;
     private ListView listView;
     private FeedRecordListAdapter adapter;
     private List<FeedRecord> feedRecordList;
@@ -39,7 +44,7 @@ public class FeederActivity extends AppCompatActivity {
 
     private TextView mConnectionStatus;
     private EditText mInputEditText;
-
+    int feedAmount;
     ConnectedTask mConnectedTask = null;
     static BluetoothAdapter mBluetoothAdapter;
     private String mConnectedDeviceName = null;
@@ -52,22 +57,19 @@ public class FeederActivity extends AppCompatActivity {
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feeder);
+        Intent intent2 = getIntent();
 
+        user = (User) intent2.getSerializableExtra("user");
         //불루투스 부분/////////////////////////////////////////
         Button sendButton = (Button)findViewById(R.id.giveButton);
         sendButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
 
-                //float num = Integer.parseInt(mInputEditText.getText().toString());
-
 
                 String sendMessage = mInputEditText.getText().toString();
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(FeederActivity.this);
-                builder.setMessage(sendMessage+"g을 주시겠습니까?")
-                        .setPositiveButton("확인", null)
-                        .create()
-                        .show();
+
+
                 if ( sendMessage.length() > 0 ) {
                     sendMessage(sendMessage);
                 }
@@ -297,16 +299,42 @@ public class FeederActivity extends AppCompatActivity {
 
         @Override
         protected void onProgressUpdate(String... recvMessage) {
-            //mConversationArrayAdapter.insert(mConnectedDeviceName + ": " + recvMessage[0], 0);
-            /*TextView sendTextView = (TextView)findViewById(R.id.sendTextView);
-            String a = "ok ";
-            int b = Integer.parseInt(recvMessage[0]);
-            if(b == 1)
-            {
-                sendTextView.setText("fffff");
-            }*/
+            Toast.makeText(getApplicationContext(), "사료주기 완료", Toast.LENGTH_LONG);
+            String userID = user.getUserID();
+            String amount = mInputEditText.getText().toString();
+            feedAmount = Integer.parseInt(amount);
+            final Response.Listener<String> responseListener = new Response.Listener<String>() {
 
+                @Override
+                public void onResponse(String response) {
 
+                    try {
+                        JSONObject jsonResponse = new JSONObject(response);
+                        boolean success = jsonResponse.getBoolean("success");
+                        if (success) {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(FeederActivity.this);
+                            builder.setMessage("실시간 급식주기가 성공했습니다..")
+                                    .setPositiveButton("확인", null)
+                                    .create()
+                                    .show();
+                        }
+                        else {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(FeederActivity.this);
+                            builder.setMessage("실시간 급식주기에 실패했습니다.")
+                                    .setNegativeButton("다시 시도", null)
+                                    .create()
+                                    .show();
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+            };
+
+            FeedRequest feedRequest = new FeedRequest(userID, feedAmount, responseListener);
+            RequestQueue queue = Volley.newRequestQueue(FeederActivity.this);
+            queue.add(feedRequest);
 
         }
 
@@ -456,7 +484,18 @@ public class FeederActivity extends AppCompatActivity {
             }
         }
     }
+    private void startProgress() {
 
+        progressON("Loading...");
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                progressOFF();
+            }
+        }, 3500);
+
+    }
 
 
 }

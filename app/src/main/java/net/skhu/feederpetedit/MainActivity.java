@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -11,13 +12,18 @@ import android.widget.ImageButton;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.R.layout.*;
+import com.android.volley.Response;
+
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
-
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 import app.akexorcist.bluetotohspp.library.BluetoothSPP;
 import app.akexorcist.bluetotohspp.library.BluetoothState;
@@ -37,28 +43,7 @@ public class MainActivity extends AppCompatActivity {
         final TextView petinfoText = (TextView)findViewById(R.id.petinfoText);
 
         user = (User)intent.getSerializableExtra("user");
-         final int petType = intent.getIntExtra("petType", 0);
-      // final int petType = intent.getExtras().getInt("petType");
-
         petinfoText.setText(user.getPetName());
-
-
-        //유저객체가 있는데
-        //그 객체가 가지고있는 정보를
-        //비만도 페이지에 보내기
-
-       if(petType == 1){
-            intent = new Intent(MainActivity.this, obesityActivity.class);
-            MainActivity.this.startActivity(intent);
-
-        }
-        //고양이 페이지
-        else if(petType == 2){
-            intent = new Intent(MainActivity.this, obesityActivity.class);
-            MainActivity.this.startActivity(intent);
-        }
-        //강아지 페이지
-
 
         if (!bt.isBluetoothAvailable()) { //블루투스 사용 불가
             Toast.makeText(getApplicationContext()
@@ -95,9 +80,9 @@ public class MainActivity extends AppCompatActivity {
 
 
         final ImageButton feederButton = (ImageButton) findViewById(R.id.feederButton);
-        final ImageButton obesityButton = (ImageButton) findViewById(R.id.obesityButton);
+        //final ImageButton cameraButton = (ImageButton) findViewById(R.id.cameraButton);
         final ImageButton reservButton = (ImageButton) findViewById(R.id.reservButton);
-        final Button bluthButton = (Button) findViewById(R.id.bluthButton);
+
 
 
         feederButton.setOnClickListener(new View.OnClickListener() {
@@ -108,38 +93,18 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //비만도페이지 버튼
-        obesityButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, obesityActivity.class);
-                intent.putExtra("obesity", user);
-                MainActivity.this.startActivity(intent);
-            }
-        });
+
         //예약페이지 버튼
         reservButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, ReservationListActivity.class);
+                intent.putExtra("user", user);
                 MainActivity.this.startActivity(intent);
             }
         });
 
 
-        bluthButton.setOnClickListener(new View.OnClickListener() {      //블루투스 버튼을 누르면 연결시도
-            public void onClick(View v) {
-                if (bt.getServiceState() == BluetoothState.STATE_CONNECTED) {
-                    //bt.disconnect();
-                    Toast.makeText(getApplicationContext(), "연결 성공", Toast.LENGTH_SHORT).show();
-                } else {
-                    Intent intent = new Intent(getApplicationContext(), DeviceList.class);
-                    startActivityForResult(intent, BluetoothState.REQUEST_CONNECT_DEVICE);
-                    Toast.makeText(getApplicationContext(), "다시 연결을 시도하세요", Toast.LENGTH_SHORT).show();
-                }
-
-            }
-        });
 
     }
 
@@ -220,7 +185,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected  void onPreExecute(){
-            target = "http://zc753951.cafe24.com/FeedRecordList.php";
+            target = "http://zc753951.cafe24.com/FeedRecordList.php?userID="+user.getUserID();
         }
 
 
@@ -234,6 +199,7 @@ public class MainActivity extends AppCompatActivity {
         public void onPostExecute(String result){
             Intent intent = new Intent(MainActivity.this, FeederActivity.class);
             intent.putExtra("feedRecordList", result);
+            intent.putExtra("user", user);
             MainActivity.this.startActivity(intent);
         }
     }
