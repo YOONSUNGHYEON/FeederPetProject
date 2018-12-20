@@ -22,7 +22,8 @@
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/kt4" />
+        app:srcCompat="@drawable/kt4"
+        android:contentDescription="TODO" />
 
     <ImageButton
         android:id="@+id/obesityButton"

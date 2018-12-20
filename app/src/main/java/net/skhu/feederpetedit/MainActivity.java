@@ -80,10 +80,18 @@ public class MainActivity extends AppCompatActivity {
 
 
         final ImageButton feederButton = (ImageButton) findViewById(R.id.feederButton);
-        //final ImageButton cameraButton = (ImageButton) findViewById(R.id.cameraButton);
+        final ImageButton obesityButton = (ImageButton) findViewById(R.id.obesityButton);
         final ImageButton reservButton = (ImageButton) findViewById(R.id.reservButton);
 
 
+        obesityButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, obesityPicture.class);
+              //  intent.putExtra("user", user);
+                MainActivity.this.startActivity(intent);
+            }
+        });
 
         feederButton.setOnClickListener(new View.OnClickListener() {
             @Override

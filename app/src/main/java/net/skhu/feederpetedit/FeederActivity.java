@@ -67,12 +67,45 @@ public class FeederActivity extends BaseActivity {
 
 
                 String sendMessage = mInputEditText.getText().toString();
+                String userID = user.getUserID();
+                String amount = mInputEditText.getText().toString();
+                feedAmount = Integer.parseInt(amount);
+                final Response.Listener<String> responseListener = new Response.Listener<String>() {
 
+                    @Override
+                    public void onResponse(String response) {
 
+                        try {
+                            JSONObject jsonResponse = new JSONObject(response);
+                            boolean success = jsonResponse.getBoolean("success");
+                            if (success) {
+                                AlertDialog.Builder builder = new AlertDialog.Builder(FeederActivity.this);
+                                builder.setMessage("실시간 급식주기가 성공했습니다..")
+                                        .setPositiveButton("확인", null)
+                                        .create()
+                                        .show();
+                            }
+                            else {
+                                AlertDialog.Builder builder = new AlertDialog.Builder(FeederActivity.this);
+                                builder.setMessage("실시간 급식주기에 실패했습니다.")
+                                        .setNegativeButton("다시 시도", null)
+                                        .create()
+                                        .show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
 
+                };
+
+                FeedRequest feedRequest = new FeedRequest(userID, feedAmount, responseListener);
+                RequestQueue queue = Volley.newRequestQueue(FeederActivity.this);
+                queue.add(feedRequest);
                 if ( sendMessage.length() > 0 ) {
                     sendMessage(sendMessage);
                 }
+
             }
         });
         mConnectionStatus = (TextView)findViewById(R.id.connection_status_textview);
@@ -300,41 +333,7 @@ public class FeederActivity extends BaseActivity {
         @Override
         protected void onProgressUpdate(String... recvMessage) {
             Toast.makeText(getApplicationContext(), "사료주기 완료", Toast.LENGTH_LONG);
-            String userID = user.getUserID();
-            String amount = mInputEditText.getText().toString();
-            feedAmount = Integer.parseInt(amount);
-            final Response.Listener<String> responseListener = new Response.Listener<String>() {
 
-                @Override
-                public void onResponse(String response) {
-
-                    try {
-                        JSONObject jsonResponse = new JSONObject(response);
-                        boolean success = jsonResponse.getBoolean("success");
-                        if (success) {
-                            AlertDialog.Builder builder = new AlertDialog.Builder(FeederActivity.this);
-                            builder.setMessage("실시간 급식주기가 성공했습니다..")
-                                    .setPositiveButton("확인", null)
-                                    .create()
-                                    .show();
-                        }
-                        else {
-                            AlertDialog.Builder builder = new AlertDialog.Builder(FeederActivity.this);
-                            builder.setMessage("실시간 급식주기에 실패했습니다.")
-                                    .setNegativeButton("다시 시도", null)
-                                    .create()
-                                    .show();
-                        }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-
-            };
-
-            FeedRequest feedRequest = new FeedRequest(userID, feedAmount, responseListener);
-            RequestQueue queue = Volley.newRequestQueue(FeederActivity.this);
-            queue.add(feedRequest);
 
         }
 

@@ -41,7 +41,6 @@
         <activity android:name=".ReservationActivity" />
         <activity android:name=".FeedRecord" />
         <activity android:name=".ReservationListActivity" />
-        <activity android:name=".obesityActivity" />
         <activity android:name=".obesityPicture" />
     </application>
 
